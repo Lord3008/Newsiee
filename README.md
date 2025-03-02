@@ -35,7 +35,7 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 - **AI-Powered Anchor:** An AI-driven news anchor reads summaries aloud, leveraging Generative AI and advanced NLP techniques.
 - **Interactive Feature:** Provides a dynamic and interactive way for users to consume news.
 
-### HACKINNO Community 🗣️🌍(On going)
+### Newsiee Community 🗣️🌍(On going)
 - **Discussion Forum:** A vibrant forum built with React and Node.js where users can share news, comment, and engage in discussions.
 - **Profile Management:** Users can create profiles, follow others, and interact with community members.
 - **Moderation Tools:** Includes moderation tools to ensure respectful and relevant discussions.
