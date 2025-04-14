@@ -2,6 +2,13 @@
 # Newsiee 🌟🚀
 
 Welcome to **Newsiee** – a groundbreaking project designed to revolutionize news consumption with intelligent features for summarization, validity verification, and interactive engagement.
+
+## Links:
+Full Product: 
+DeepFake Image Detection:
+AI News Anchor:
+AI Video Avatar:
+AI Tutor:
 ## Table of Contents 📚
 
 1. [Features ✨](#features-)
