@@ -56,7 +56,7 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 
 ## Getting Started 🚀
 
-1. **Clone the Repository:**
+1. **Clone our hackathon repository:**
    ```bash
    git clone https://github.com/chayanC7mondal/HACKINNO.git
    ```
