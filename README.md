@@ -26,10 +26,14 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
 - **Validity Indicator:** Provides clear visual indicators of news validity.
 
-### Audio Feature 🎤🔊(On going)
+### Audio Feature 🎤🔊
 - **Text-to-Speech (TTS) Conversion:** Converts text summaries into audio using advanced TTS services (e.g., Google Text-to-Speech).
 - **Engaging Visuals:** Includes relevant images or graphics using React components.
 - **Integrated Audio Player:** Features an intuitive audio player built with JavaScript and React.
+
+### AI Anchor:
+
+### AI Tutor:
 
 ### News AI Anchor 🎙️🤖
 - **AI-Powered Anchor:** An AI-driven news anchor reads summaries aloud, leveraging Generative AI and advanced NLP techniques.
@@ -39,6 +43,9 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 - **Discussion Forum:** A vibrant forum built with React and Node.js where users can share news, comment, and engage in discussions.
 - **Profile Management:** Users can create profiles, follow others, and interact with community members.
 - **Moderation Tools:** Includes moderation tools to ensure respectful and relevant discussions.
+
+### Quiz Section:
+### NLP based UPSC Questions: (On going)
 
 ## Tech Stack 🛠️
 
