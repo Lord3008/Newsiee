@@ -4,13 +4,13 @@
 Welcome to **Newsiee** – a groundbreaking project designed to revolutionize news consumption with intelligent features for summarization, validity verification, and interactive engagement.
 
 ## Links:
-Full Product:
+Full Product: https://newsiee-h66l.vercel.app/
 
 DeepFake Image Detection: https://deepfakeself-my.streamlit.app/ 
 
 AI News Anchor:
 
-AI Video Avatar:
+AI Video Avatar:https://ai-video-avatar-two.vercel.app/
 
 AI Tutor:
 
