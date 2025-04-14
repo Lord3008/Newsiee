@@ -5,7 +5,7 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 
 ## Links:
 Full Product: 
-DeepFake Image Detection:
+DeepFake Image Detection: https://deepfakeself-my.streamlit.app/ 
 AI News Anchor:
 AI Video Avatar:
 AI Tutor:
