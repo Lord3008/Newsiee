@@ -37,10 +37,11 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 ## 2. Multimodal Deepfake Detection 🔍🚫
 ### A. Deepfake Image Detector: 
    #### a. Cross- Domain Method:
-   This is associted with **my research paper** titled "A Novel Unified Approach to Deepfake Detection of Images" publised in ISED, 2024 by IEEE. The detailed architecture and novelity can be found in detail in the research paper.
-      - **Detection Model:** Implements a multimodal deepfake detection model combining image and text analysis to assess news authenticity.
-      - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
-      - **Validity Indicator:** Provides clear visual indicators of news validity.
+   This is associted with **my research paper** titled "A Novel Unified Approach to Deepfake Detection of Images" publised in ISED, 2024 by IEEE. The detailed architecture and novelity can be found in detail in the research paper. This alone is a great area of research and it helps to combat the threats of AI generated media. Despite of researches, development of a single model that is generalised for all types of deepfakes is difficult due to the diversity in images. This model is trained and tested on the **FF++ dataset**.
+
+   - **Detection Model:** Implements a multimodal deepfake detection model combining image analysis to assess news authenticity. The model verifies if the images present along with the news are real or fake.
+   - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification. (Real-time is not currently implemeted, but one can use the model to check manually.)
+   - **Validity Indicator:** Provides clear visual indicators of news validity. (We can do this using the deepfake detecton model)
 
    #### b. GAN Fingerprinting based method:
    The code of this will be added as soon as my other research paper gets published.
@@ -49,9 +50,9 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 This is to verifiy if the text or content of the news are correct or not.
 
 ### 3. Audio Feature 🎤🔊
-- **Text-to-Speech (TTS) Conversion:** Converts text summaries into audio using advanced TTS services (e.g., Google Text-to-Speech).
-- **Engaging Visuals:** Includes relevant images or graphics using React components.
-- **Integrated Audio Player:** Features an intuitive audio player built with JavaScript and React.
+- **Text-to-Speech (TTS) Conversion:** Converts text summaries into audio using advanced TTS services (I have used Google Text-to-Speech (GTTS)).
+- **Engaging Visuals:** Includes relevant images or graphics using React components. (This is currently fetched from the news api we are using)
+- **Integrated Audio Player:** Features an intuitive audio player built with JavaScript and React. (Not implemented in real-time but present in working stage in jupyter notebook)
 
 ### 4. AI Tutor:
 
