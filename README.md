@@ -1,5 +1,5 @@
 
-# Newsiee 🌟🚀
+# Newsiee: General & UPSC
 
 Welcome to **Newsiee** – a groundbreaking project designed to revolutionize news consumption with intelligent features for summarization, validity verification, and interactive engagement. We focus not only on the audience who consue news but also specifically on **UPSC** aspirants who need to be in touch with current affirs. For, them I haved designed a platform to get authentcate news, a deepfake detection system to check its validity, AI Tutor to help them study, make ppts or notes and Quiz section where they can test their knowledge on specific topics. 
 
