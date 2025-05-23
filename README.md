@@ -27,22 +27,26 @@ Welcome to **Newsiee** – a groundbreaking project designed to revolutionize ne
 3. [Getting Started 🚀](#getting-started-)
 4. [License 📜](#license-)
 
-## Features ✨
+# Features ✨
 
-### 1. News Fetching and Summarization 📰📋
+## 1. News Fetching and Summarization 📰📋
 - **API Integration:** Connects to various news APIs (e.g., NewsAPI, Bing News Search) to fetch the latest news from diverse sources.
-- **Machine Learning Summarization:** Utilizes advanced ML models like BERT and Shine Transformer to summarize articles into concise 60-word summaries.
-- **Frontend Display:** Summaries are presented in a user-friendly format using HTML, CSS, jQuery, and Bootstrap.
+- **Machine Learning Summarization:** Utilizes advanced ML models like BERT to summarize articles into concise 60-word summaries.
+- **Frontend Display:** Summaries are presented in a user-friendly format using HTML, CSS, jQuery, and Bootstrap. (To be implemented)
 
-### 2. Multimodal Deepfake Detection 🔍🚫
-#### a. Cross- Domain Method:
-This is associted with **my research paper** titled "A Novel Unified Approach to Deepfake Detection of Images" publised in ISED, 2024 by IEEE. The detailed architecture and novelity can be found in detail in the research paper.
-   - **Detection Model:** Implements a multimodal deepfake detection model combining image and text analysis to assess news authenticity.
-   - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
-   - **Validity Indicator:** Provides clear visual indicators of news validity.
+## 2. Multimodal Deepfake Detection 🔍🚫
+### A. Deepfake Image Detector: 
+   #### a. Cross- Domain Method:
+   This is associted with **my research paper** titled "A Novel Unified Approach to Deepfake Detection of Images" publised in ISED, 2024 by IEEE. The detailed architecture and novelity can be found in detail in the research paper.
+      - **Detection Model:** Implements a multimodal deepfake detection model combining image and text analysis to assess news authenticity.
+      - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
+      - **Validity Indicator:** Provides clear visual indicators of news validity.
 
-#### b. GAN Fingerprinting based method:
-The code of this will be added as soon as my other research paper gets published.
+   #### b. GAN Fingerprinting based method:
+   The code of this will be added as soon as my other research paper gets published.
+
+### B. Fake News Detector:
+This is to verifiy if the text or content of the news are correct or not.
 
 ### 3. Audio Feature 🎤🔊
 - **Text-to-Speech (TTS) Conversion:** Converts text summaries into audio using advanced TTS services (e.g., Google Text-to-Speech).
@@ -62,8 +66,10 @@ The code of this will be added as soon as my other research paper gets published
 
 ### 7. Quiz Section:
 A dummy version of this is added in the website for time being as I am working o this.
-### NLP based UPSC Questions:
+### 8. NLP based UPSC Questions:
 This is currently under work.
+
+
 ## Tech Stack 🛠️
 
 - **Authentication:** OAuth
@@ -73,22 +79,22 @@ This is currently under work.
 
 ## Getting Started 🚀
 
-1. **Clone our hackathon repository:**
-   ```bash
-   https://github.com/Lord3008/Newsiee.git
-   ```
-2. **Install Dependencies:**
-   Navigate to the project directory and install the required dependencies.
-   ```bash
-   cd Newsiee
-   pip install -r requirements.txt  # For Python projects with ML models
-   ```
-3. **Run the Application:**
-   Start the backend and frontend servers as instructed in the documentation.
-   ```bash
-   npm start  # For Node.js projects
-   ```
-   Follow additional instructions for setting up the ML models and database.
+   1. **Clone our hackathon repository:**
+      ```bash
+      https://github.com/Lord3008/Newsiee.git
+      ```
+   2. **Install Dependencies:**
+      Navigate to the project directory and install the required dependencies.
+      ```bash
+      cd Newsiee
+      pip install -r requirements.txt  # For Python projects with ML models
+      ```
+   3. **Run the Application:**
+      Start the backend and frontend servers as instructed in the documentation.
+      ```bash
+      npm start  # For Node.js projects
+      ```
+      Follow additional instructions for setting up the ML models and database.
 
 
 ## License 📜
