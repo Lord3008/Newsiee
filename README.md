@@ -34,9 +34,11 @@ AI Tutor:
 - **Frontend Display:** Summaries are presented in a user-friendly format using HTML, CSS, jQuery, and Bootstrap.
 
 ### Multimodal Deepfake Detection 🔍🚫
-- **Detection Model:** Implements a multimodal deepfake detection model combining image and text analysis to assess news authenticity.
-- **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
-- **Validity Indicator:** Provides clear visual indicators of news validity.
+#### Cross- Domain Method:
+This is associted with **my research paper** titled "A Novel Unified Approach to Deepfake Detection of Images" publised in ISED, 2024 by IEEE. The detailed architecture and novelity can be found in detail in the research paper.
+   - **Detection Model:** Implements a multimodal deepfake detection model combining image and text analysis to assess news authenticity.
+   - **Automatic Validity Checks:** Flags potentially misleading or false news articles with real-time verification.
+   - **Validity Indicator:** Provides clear visual indicators of news validity.
 
 ### Audio Feature 🎤🔊
 - **Text-to-Speech (TTS) Conversion:** Converts text summaries into audio using advanced TTS services (e.g., Google Text-to-Speech).
