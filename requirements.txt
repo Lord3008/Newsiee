@@ -2,3 +2,9 @@ gtts
 numpy
 pandas
 spacy
+requests
+openai
+langchain
+python-dotenv
+streamlit
+bs4
