@@ -55,6 +55,7 @@ This is to verifiy if the text or content of the news are correct or not.
 - **Integrated Audio Player:** Features an intuitive audio player built with JavaScript and React. (Not implemented in real-time but present in working stage in jupyter notebook)
 
 ### 4. AI Tutor:
+This can create a lecture on a specific topic if given with link of an werbsite or a blogpost or a pdf etc. Firstly, AI-Tutor generates a pdf from any of the given format. Then it reads the pdf and develops a contextual understanding of the same. It then creates a ppt of the topic. After the it generates an explaination of each slide not mere reading it. After that both the ppt and explaination are synchronized to get a video explaination or full-fleged presentation of the topic. See AI Tutor/AI-Tutor --> code at create_lecture.ipynb, ppt, video explaination etc are also uploaded there.
 
 ### 5. News AI Anchor 🎙️🤖
 - **AI-Powered Anchor:** An AI-driven news anchor reads summaries aloud, leveraging Generative AI and advanced NLP techniques.
