@@ -67,7 +67,7 @@ This can create a lecture on a specific topic if given with link of an werbsite 
 - **Moderation Tools:** Includes moderation tools to ensure respectful and relevant discussions.
 
 ### 7. Quiz Section:
-A dummy version of this is added in the website for time being as I am working o this.
+Run the backend in your local server by : uvicorn main:app --reload
 ### 8. NLP based UPSC Questions:
 This is currently under work.
 
