@@ -1,417 +1,465 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Community Newsiee</title>
+  <title>Newsiee Community - UPSE & News Debates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tailwind CSS -->
   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-<style>
-		[x-cloak] {
-			display: none;
-		}
-
-	</style>
-<link rel="stylesheet" href="./style.css">
-
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    [x-cloak] { display: none; }
+    .debate-link { word-break: break-all; }
+    .section-title { font-size: 1.5em; font-weight: bold; color: #1b73bb; margin-bottom: 0.5em; }
+    .gmeet-btn { background: #34a853; color: #fff; border-radius: 8px; padding: 0.5em 1.2em; font-weight: 600; }
+    .gmeet-btn:hover { background: #257a3e; }
+    .debate-card { background: #e3f1fd; border-radius: 10px; padding: 1em 1.2em; margin-bottom: 1em; }
+    .debate-topic { font-weight: 600; color: #00796b; }
+    .debate-meta { font-size: 0.95em; color: #555; }
+    .debate-actions button { margin-right: 0.5em; }
+    .newsiee-gradient { background: linear-gradient(90deg, #2294ed 0%, #1b73bb 100%); }
+    /* Reduce nav bar height */
+    .newsiee-gradient { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+  </style>
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<body class="antialiased sans-serif bg-gray-200">
-	<div x-data="app()" x-cloak>
-		<div class="bg-white shadow">
-			<div class="container mx-auto px-4 py-2 md:py-3">
-				<div class="flex justify-between items-center">
-					<div class="text-lg md:text-xl font-bold text-gray-800">Newsiee</div>
-					<div class="relative" x-data="{ open: false }" x-cloak>
-						<div @click="open = !open"
-							class="cursor-pointer font-bold w-10 h-10 bg-blue-200 text-blue-600 flex items-center justify-center rounded-full">
-							A
-						</div>
+<body class="antialiased sans-serif bg-gray-100">
+  <div x-data="app()" x-cloak>
+    <!-- Header -->
+    <header class="newsiee-gradient shadow px-4 flex flex-col md:flex-row items-center justify-between" style="padding-top:0.75rem;padding-bottom:0.75rem;">
+      <div class="flex items-center space-x-4">
+        <img src="https://img.icons8.com/color/48/000000/news.png" class="h-10 w-10" alt="Newsiee Logo">
+        <span class="text-3xl font-bold text-white tracking-wide">Newsiee Community</span>
+      </div>
+      <div class="mt-4 md:mt-0 flex items-center space-x-6">
+        <span class="text-white font-semibold hidden md:inline">UPSE & News Debates Forum</span>
+        <div class="relative" x-data="{ open: false }" x-cloak>
+          <div @click="open = !open"
+            class="cursor-pointer font-bold w-10 h-10 bg-blue-200 text-blue-600 flex items-center justify-center rounded-full">
+            A
+          </div>
+          <div x-show.transition="open" @click.away="open = false"
+            class="absolute top-0 mt-12 right-0 w-48 bg-white py-2 shadow-md border border-gray-100 rounded-lg z-40">
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Edit Profile</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Account Settings</a>
+            <a href="http://deepfakeself-my.streamlit.app/" target="_blank" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">DEEP-FAKE</a>
+          </div>
+        </div>
+      </div>
+    </header>
 
-						<div x-show.transition="open" @click.away="open = false"
-							class="absolute top-0 mt-12 right-0 w-48 bg-white py-2 shadow-md border border-gray-100 rounded-lg z-40">
-							<a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Edit
-								Profile</a>
-							<a href="#"
-								class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Account
-								Settings</a>
-							<a href="http://deepfakeself-my.streamlit.app/" target="_blank" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">DEEP-FAKE</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="container mx-auto px-4 py-10">
-			<div class="md:flex -mx-4">
-				<div class="md:w-2/4 px-4">
-					<div class="bg-white rounded-lg shadow p-6 mb-8">
-						<div class="flex w-full">
-							<div class="flex-shrink-0 mr-5">
-								<div class="cursor-pointer font-bold w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
-									<span x-text="generateAvatarFromName('Current User')" class="uppercase text-gray-700"></span>
-								</div>
-							</div>
-							<div class="flex-1">
-								<textarea x-model="tweetText" 
-									class="mb-2 bg-gray-200 focus:outline-none focus:shadow-outline focus:bg-white border border-transparent rounded-lg py-2 px-4 block w-full appearance-none leading-normal placeholder-gray-700" 
-									:class="{'border border-red-500': tweetIsOutOfRange() && tweetText.length != 0 }"
-									rows="3"
-									placeholder="What's happening..."></textarea>
+    <main class="container mx-auto px-4 py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Left: News Feed & Discussions -->
+        <section class="flex-1 min-w-0">
+          <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="section-title">📰 Latest News & Discussions</div>
+            <!-- Post Tweet/Discussion -->
+            <div class="flex w-full mb-4">
+              <div class="flex-shrink-0 mr-5">
+                <div class="cursor-pointer font-bold w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
+                  <span x-text="generateAvatarFromName('Current User')" class="uppercase text-gray-700"></span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <textarea x-model="tweetText"
+                  class="mb-2 bg-gray-200 focus:outline-none focus:shadow-outline focus:bg-white border border-transparent rounded-lg py-2 px-4 block w-full appearance-none leading-normal placeholder-gray-700"
+                  :class="{'border border-red-500': tweetIsOutOfRange() && tweetText.length != 0 }"
+                  rows="3"
+                  placeholder="Share news, ask a question, or start a discussion..."></textarea>
+                <!-- Image upload -->
+                <div class="flex items-center mb-2">
+                  <input type="file" id="tweetImageInput" accept="image/*" @change="onTweetImageChange($event)" class="hidden">
+                  <label for="tweetImageInput" class="cursor-pointer inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 mr-2">
+                    <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Add Image
+                  </label>
+                  <template x-if="tweetImage">
+                    <div class="relative ml-2">
+                      <img :src="tweetImage" class="h-12 w-12 object-cover rounded border" alt="Preview">
+                      <button @click="removeTweetImage()" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-1 py-0 text-xs">x</button>
+                    </div>
+                  </template>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600" x-text="charactersRemaining()"></span>
+                  <button
+                    @click="saveTweet()"
+                    :disabled="(tweetText == '') || tweetIsOutOfRange()"
+                    :class="{'cursor-not-allowed opacity-50': (tweetText == '') || tweetIsOutOfRange()}"
+                    class="focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow text-center text-white bg-blue-500 hover:bg-blue-600 font-medium"
+                  >Post</button>
+                </div>
+              </div>
+            </div>
+            <!-- News/Discussion Feed -->
+            <ul>
+              <template x-for="(tweet, tweetIndex) in tweets" :key="tweetIndex">
+                <li class="debate-card relative">
+                  <div class="flex items-center mb-2 justify-between">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 mr-3">
+                        <div class="cursor-pointer font-bold w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full">
+                          <span x-text="generateAvatarFromName(tweet.name)" class="uppercase text-gray-700"></span>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="font-bold text-gray-800 mr-2" x-text="tweet.name"></span>
+                        <span x-text="tweet.username" class="text-gray-600"></span>
+                        <span class="mx-1 text-gray-500">&bull;</span>
+                        <span class="text-gray-600" x-text="formatDate(tweet.date)"></span>
+                      </div>
+                    </div>
+                    <!-- Tag beside date -->
+                    <template x-if="tweet.tweet_image_tag">
+                      <span
+                        class="ml-2 px-2 py-0.5 rounded-lg text-xs font-semibold border"
+                        :class="{
+                          'bg-green-200 border-green-400 text-green-900': tweet.tweet_image_tag === 'Real',
+                          'bg-red-200 border-red-400 text-black': tweet.tweet_image_tag === 'Fake',
+                          'bg-yellow-200 border-yellow-400 text-yellow-900': tweet.tweet_image_tag === 'Unknown'
+                        }"
+                        style="min-width:48px; text-align:center;"
+                        x-text="tweet.tweet_image_tag"
+                      ></span>
+                    </template>
+                  </div>
+                  <div class="mb-2 text-gray-800" x-text="tweet.tweet"></div>
+                  <!-- Show image if present -->
+                  <template x-if="tweet.tweet_image">
+                    <div class="mb-2">
+                      <img :src="tweet.tweet_image" class="rounded border max-h-60">
+                    </div>
+                  </template>
+                  <div class="flex items-center space-x-4 text-gray-600 text-sm">
+                    <button @click="likeTweet(tweetIndex)" class="focus:outline-none">
+                      <svg x-show="tweet.hasBeenLiked == false" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                      </svg>
+                      <svg x-show="tweet.hasBeenLiked == true" class="h-5 w-5 inline text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                      </svg>
+                      <span x-text="tweet.likes"></span>
+                    </button>
+                    <button @click="retweet(tweetIndex)" class="focus:outline-none">
+                      <svg class="h-5 w-5 inline" :class="{'text-gray-500': tweet.hasBeenRetweeted == false, 'text-green-500': tweet.hasBeenRetweeted == true }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                      </svg>
+                      <span x-text="tweet.retweets"></span>
+                    </button>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </section>
 
-									<div class="relative w-auto mb-2 border rounded-lg relative bg-gray-100 mb-4 shadow-inset overflow-hidden" x-show="images.length > 0">
-										<div class="gg-container">
-											<div class="gg-box square-gallery" style="margin: 0">
-												<template x-for="image in images">
-													<img class="object-cover w-full" :src="image" />
-												</template>
-											</div>
-										</div>
-										<div @click="images = []; document.getElementById('fileInput').value = ''" class="shadow cursor-pointer absolute top-0 right-0 p-2 mr-2 mt-2 rounded-full bg-gray-600">
-											<svg class="h-6 w-6 text-gray-100"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-											  </svg>								  
-										</div>
-									</div>
-			
-									<input multiple name="photo" id="fileInput" accept="image/*" class="hidden" type="file" @change="let files = document.getElementById('fileInput').files; 
-										for (var i = 0; i < files.length; i++) {
-												var reader = new FileReader();
-												reader.onload = (e) => images.push(e.target.result);
-												reader.readAsDataURL(files[i]);
-										}
-									">
-									
-									<div class="flex justify-between items-center">
-										<div>
-											<label 
-												for="fileInput"
-												type="button"
-												class="-ml-2 cursor-pointer inine-flex justify-between items-center focus:outline-none p-2 rounded-full text-gray-500 bg-white hover:bg-gray-200"
-											>
-												<svg class="h-6 w-6 text-gray-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-												  </svg>  
-											</label>
-										</div>
-										<div>
-											<span :class="{ 'text-red-600': charactersRemaining() <= 20 && charactersRemaining() > 10, 'text-red-400': charactersRemaining() <= 10 }" class="mr-3 text-sm text-gray-600" x-text="charactersRemaining()"></span>
-			
-											<button
-												@click="saveTweet()"
-												:disabled="(tweetText == '') || tweetIsOutOfRange()"
-												:class="{'cursor-not-allowed opacity-50': (tweetText == '') || tweetIsOutOfRange()}"
-												type="button"
-												class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
-											>Share Away</button>
-										</div>
-									</div>
-							</div>
-						</div>
+        <!-- Right: Debates & Community -->
+        <aside class="w-full lg:w-1/3 min-w-0">
+          <!-- Start a Debate Section -->
+          <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="section-title">🔥 Start a Debate</div>
+            <form @submit.prevent="startDebate()" class="mb-4">
+              <input x-model="debateTopic" type="text" placeholder="Debate Topic (e.g., 'Is social media a boon or bane for UPSE prep?')" class="w-full mb-2 px-3 py-2 border rounded focus:outline-none focus:border-blue-400" required>
+              <input x-model="debateGMeet" type="url" placeholder="Google Meet Link (optional)" class="w-full mb-2 px-3 py-2 border rounded focus:outline-none focus:border-blue-400">
+              <input x-model="debateTime" type="datetime-local" class="w-full mb-2 px-3 py-2 border rounded focus:outline-none focus:border-blue-400" required placeholder="Debate Time">
+              <button type="submit" class="gmeet-btn w-full">Start Debate</button>
+            </form>
+            <div>
+              <div class="font-semibold mb-2 text-gray-700">Active Debates</div>
+              <template x-if="debates.length === 0">
+                <div class="text-gray-500 text-sm">No debates yet. Start one above!</div>
+              </template>
+              <template x-for="(debate, idx) in debates" :key="idx">
+                <div class="debate-card">
+                  <div class="debate-topic" x-text="debate.topic"></div>
+                  <div class="debate-meta mb-1">
+                    Started by <span class="font-semibold" x-text="debate.startedBy"></span>
+                    <span class="mx-1">&bull;</span>
+                    <span x-text="formatDate(debate.date)"></span>
+                  </div>
+                  <div class="debate-meta mb-1" x-show="debate.time">
+                    <span class="font-semibold">Debate Time:</span>
+                    <span x-text="formatDebateTime(debate.time)"></span>
+                  </div>
+                  <template x-if="debate.gmeet">
+                    <div class="mb-2">
+                      <a :href="debate.gmeet" target="_blank" class="debate-link text-blue-600 underline">Join Google Meet</a>
+                    </div>
+                  </template>
+                  <div class="debate-actions">
+                    <button class="gmeet-btn" @click="copyGMeet(debate.gmeet)" x-show="debate.gmeet">Copy Link</button>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
 
-					</div>
+          <!-- UPSE Toppers Tips Section -->
+          <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="section-title">🌟 UPSE Toppers Tips</div>
+            <ul class="list-disc pl-6 text-gray-800 space-y-2">
+              <li><span class="font-semibold">Consistent Revision:</span> Revise your notes regularly to retain facts and concepts.</li>
+              <li><span class="font-semibold">Mock Tests:</span> Attempt regular mock tests to analyze your strengths and weaknesses.</li>
+              <li><span class="font-semibold">Current Affairs:</span> Make daily notes from newspapers and reliable sources.</li>
+              <li><span class="font-semibold">Balanced Routine:</span> Maintain a healthy balance between study and relaxation.</li>
+              <li><span class="font-semibold">Peer Discussions:</span> Discuss topics with peers to gain new perspectives.</li>
+            </ul>
+          </div>
 
-					<ul class="bg-white rounded-lg shadow mb-8">
-						<template x-for="(tweet, tweetIndex) in tweets" :key="tweetIndex">	
-							<div>
-								<li class="px-6 py-5" :class="{'border-b border-gray-200': (tweetIndex + 1) != tweets.length }">
-									<div class="flex w-full">
-										<div class="flex-shrink-0 mr-5">
-											<div class="cursor-pointer font-bold w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
-												<span x-text="generateAvatarFromName(tweet.name)" class="uppercase text-gray-700"></span>
-											</div>
-										</div>
-										<div class="flex-1">
-											<div>
-												<strong class="font-bold text-gray-800 mr-2" x-text="tweet.name"></strong> 
-												<span x-text="tweet.username" class="text-gray-600"></span>
-												<span class="mx-1 text-gray-500">&bull;</span>
-												<span class="text-gray-600" x-text="formatDate(tweet.date)"></span>
-											</div>
+          <!-- Who to Follow -->
+          <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="section-title">👥 Who to Follow</div>
+            <template x-for="(followersSuggestion, followersSuggestionIndex) in followersSuggestions" :key="followersSuggestionIndex">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center">
+                  <div class="cursor-pointer font-bold w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full mr-3">
+                    <span x-text="generateAvatarFromName(followersSuggestion.name)" class="uppercase text-gray-700"></span>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-800" x-text="followersSuggestion.name"></div>
+                    <div class="text-gray-500 text-sm" x-text="followersSuggestion.username"></div>
+                  </div>
+                </div>
+                <button
+                  @click="follow(followersSuggestion.username)"
+                  class="focus:outline-none py-1 px-4 rounded-full shadow-sm text-center text-blue-600 bg-white hover:bg-blue-100 font-medium border border-blue-200"
+                >Follow</button>
+              </div>
+            </template>
+          </div>
 
-											<div class="mb-4">
-												<p x-text="tweet.tweet" class="text-gray-700"></p>
-											</div>
-											 
-											<div class="relative w-auto mb-2 border rounded-lg relative bg-gray-100 mb-4 shadow-inset overflow-hidden" x-show="tweet.tweet_images.length > 0">
+          <!-- Following -->
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="section-title">✅ Following</div>
+            <template x-for="(following, followingIndex) in followings" :key="followingIndex">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center">
+                  <div class="cursor-pointer font-bold w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full mr-3">
+                    <span x-text="generateAvatarFromName(following.name)" class="uppercase text-gray-700"></span>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-800" x-text="following.name"></div>
+                    <div class="text-gray-500 text-sm" x-text="following.username"></div>
+                  </div>
+                </div>
+                <button
+                  @click="unfollow(following.username)"
+                  class="focus:outline-none py-1 px-4 rounded-full shadow-sm text-center text-blue-600 bg-white hover:bg-blue-100 font-medium border border-blue-200"
+                >Unfollow</button>
+              </div>
+            </template>
+          </div>
+        </aside>
+      </div>
+    </main>
 
-												<div class="gg-container">
-													<div class="gg-box square-gallery" style="margin: 0">
-														<template x-for="image in tweet.tweet_images"> 
-															<img class="object-cover w-full" :src="image" />	 
-														</template>
-													</div>
-												</div>
-											</div>
+    <footer class="container mx-auto pb-10 text-center">
+      <p class="text-gray-600">Created by <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="#">Lord</a>. Built with <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="https://tailwindcss.com/">tailwindCSS</a>, <a href="https://github.com/alpinejs/alpine" class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300">AlpineJS</a> and <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="https://jestov.com/grid-gallery">Grid Gallery</a>.</p>
+    </footer>
+  </div>
 
-											<div class="flex items-center w-full">
-												<div class="w-1/4 flex items-center">
-													<div class="cursor-pointer hover:bg-gray-200 inline-flex p-2 rounded-full duration-200 transition-all ease-in-out">
-														<svg class="h-6 w-6 text-gray-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-														</svg>													  
-													</div>
-												</div>
-												<div class="w-1/4 flex items-center">
-													<div @click="retweet(tweetIndex, tweet.retweets)" class="cursor-pointer hover:bg-gray-200 inline-flex p-2 rounded-full duration-200 transition-all ease-in-out">
-														<svg class="h-6 w-6" :class="{'text-gray-500': tweet.hasBeenRetweeted == false, 'text-green-500': tweet.hasBeenRetweeted == true }"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-														</svg>													  
-													</div>
-													<div x-text="tweet.retweets" class="ml-1 leading-none inline-flex" :class="{'text-gray-600': tweet.hasBeenRetweeted == false, 'text-green-600': tweet.hasBeenRetweeted == true}"></div>
-												</div>
+  <script>
+    const MAX_TWEET_LENGTH = 140;
+    const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-												<div class="w-1/4 flex items-center">
-													<div @click="likeTweet(tweetIndex)" class="cursor-pointer hover:bg-gray-200 inline-flex p-2 rounded-full duration-200 transition-all ease-in-out">
-														<svg x-show="tweet.hasBeenLiked == false" class="h-6 w-6 text-gray-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-														</svg>
+    function app() {
+      return {
+        tweetText: '',
+        tweetImage: null,
+        tweetImageTag: null,
+        tweets: [
+          {
+            name: "John Wick",
+            username: "@john1123wick",
+            tweet: 'A Brazilian Supreme Court justice could shut down the local operation of X nationwide on Thursday if its billionaire owner Elon Musk doesn’t name a legal representative by this evening',
+            retweets: 12,
+            likes: 50,
+            date: "2020-04-06 12:00:00",
+            hasBeenLiked: false,
+            hasBeenRetweeted: false,
+            tweet_image: null,
+            tweet_image_tag: null
+          },
+          {
+            name: "Captain India",
+            username: "@capIndia",
+            tweet: 'Senior India batter Virat Kohli penned a heartfelt note for Shikhar Dhawan after the latters announcement to retire from domestic and international cricket. Kohli took to Twitter to share a lovely message for his former teammate...',
+            retweets: 10,
+            likes: 100,
+            date: "2020-04-02",
+            hasBeenLiked: false,
+            hasBeenRetweeted: false,
+            tweet_image: null,
+            tweet_image_tag: null
+          }
+        ],
+        followersSuggestions: [
+          { name: "Aaj Tak", username: "@Aajtak" },
+          { name: "ABP News", username: "@abpabhi" },
+          { name: "The Guardian", username: "@guardian" }
+        ],
+        followings: [
+          { name: "chayan Mondal", username: "@me" },
+          { name: "Lord Sen", username: "@lord" }
+        ],
+        debates: [
+          // { topic: "...", gmeet: "...", startedBy: "...", date: ..., time: ... }
+        ],
+        debateTopic: '',
+        debateGMeet: '',
+        debateTime: '',
 
-														<svg x-show="tweet.hasBeenLiked == true" class="h-6 w-6 text-red-500"  viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
-													</div>
-													<div x-text="tweet.likes" class="ml-1 text-gray-600 leading-none inline-flex" :class="{'text-gray-600': tweet.hasBeenLiked == false, 'text-red-600': tweet.hasBeenLiked == true}"></div>
-												</div>
-
-												<div class="w-1/4 flex items-center">
-													<div class="cursor-pointer hover:bg-gray-200 inline-flex p-2 rounded-full duration-200 transition-all ease-in-out">
-														<svg class="h-6 w-6 text-gray-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-														</svg>
-													</div>
-												</div>	
-											</div>
-										</div>
-									</div>
-								</li>
-							</div>
-						</template>
-					</ul>
-				</div>
-
-				<div class="md:w-1/3 px-4">
-					<ul class="bg-white rounded-lg shadow mb-8">
-						<li class="px-6 py-3 border-b border-gray-200">
-							<div class="font-bold text-gray-800">Who to follow</div>
-						</li>
-						<template x-for="(followersSuggestion, followersSuggestionIndex) in followersSuggestions" :key="followersSuggestionIndex">	
-							<li class="px-6 py-3" :class="{'border-b border-gray-200': (followersSuggestionIndex + 1) != followersSuggestions.length }">
-								<div class="flex w-full">
-									<div class="flex-shrink-0 mr-5">
-										<div class="cursor-pointer font-bold w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
-											<span x-text="generateAvatarFromName(followersSuggestion.name)" class="uppercase text-gray-700"></span>
-										</div>
-									</div>
-									<div class="flex-1 flex flex-row justify-between items-center">
-										<div>
-											<p x-text="followersSuggestion.name" class="text-gray-700"></p> 
-											<p x-text="followersSuggestion.username" class="text-gray-500"></p>
-										</div> 
-										<div>
-											<button
-												@click="follow(followersSuggestion.username)"
-												class="focus:outline-none py-1 px-4 rounded-full shadow-sm text-center text-blue-600 bg-white hover:bg-blue-100 font-medium border border-blue-200" 
-											>Follow</button>
-										</div>
-									</div>
-								</div>
-							</li>
-						</template>
-					</ul>
-
-					<ul class="bg-white rounded-lg shadow mb-8">
-						<li class="px-6 py-3 border-b border-gray-200">
-							<div class="font-bold text-gray-800">Following</div>
-						</li>
-						<template x-for="(following, followingIndex) in followings" :key="followingIndex">	
-							<li class="px-6 py-3" :class="{'border-b border-gray-200': (followingIndex + 1) != followings.length }">
-								<div class="flex w-full">
-									<div class="flex-shrink-0 mr-5">
-										<div class="cursor-pointer font-bold w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
-											<span x-text="generateAvatarFromName(following.name)" class="uppercase text-gray-700"></span>
-										</div>
-									</div>
-									<div class="flex-1 flex flex-row justify-between items-center">
-										<div>
-											<p x-text="following.name" class="text-gray-700"></p> 
-											<p x-text="following.username" class="text-gray-500"></p>
-										</div> 
-										<div>
-											<button
-												@click="unfollow(following.username)"
-												class="focus:outline-none py-1 px-4 rounded-full shadow-sm text-center text-blue-600 bg-white hover:bg-blue-100 font-medium border border-blue-200" 
-											>Unfollow</button>
-										</div>
-									</div>
-								</div>
-							</li>
-						</template>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container mx-auto">
-		<div class="pb-10 text-center">
-			<p class="text-gray-600">Created by <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="#">chayan</a>. Built with <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="https://tailwindcss.com/">tailwindCSS</a>, <a href="https://github.com/alpinejs/alpine" class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300">AlpineJS</a> and <a class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300" href="https://jestov.com/grid-gallery">Grid Gallery</a>.</p>
-		</div>
-	</div>
-
-	<script>
-		const MAX_TWEET_LENGTH = 140;
-		const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-		function app() {
-			return {
-				tweetText: '',
-				images: [],
-
-				tweets: [
-					{
-						name: "John Wick",
-						username: "@john1123wick",
-						tweet: 'A Brazilian Supreme Court justice could shut down the local operation of X nationwide on Thursday if its billionaire owner Elon Musk doesn’t name a legal representative by this evening',
-						retweets: 12,
-						likes: 50,
-						date: "2020-04-06 12:00:00",
-						tweet_images: [],
-						hasBeenLiked: false,
-						hasBeenRetweeted: false
-					},
-					{
-						name: "Captain India",
-						username: "@capIndia",
-						tweet: 'Senior India batter Virat Kohli penned a heartfelt note for Shikhar Dhawan after the latters announcement to retire from domestic and international cricket. Kohli took to Twitter to share a lovely message for his former teammate...',
-						retweets: 10,
-						likes: 100,
-						date: "2020-04-02",
-						tweet_images: [],
-						hasBeenLiked: false,
-						hasBeenRetweeted: false
-					}
-				],
-				
-				followersSuggestions: [
-					{
-						name: "Aaj Tak",
-						username: "@Aajtak"
-					},
-					{
-						name: "ABP News",
-						username: "@abpabhi"
-					},
-					{
-						name: "The Guardian",
-						username: "@guardian"
-					}
-				],
-
-				followings: [
-					{
-						name: "chayan Mondal",
-						username: "@me"
-					},
-					{
-						name: "Lord Sen",
-						username: "@lord"
-					}
-				],
-				
-				follow(username) {
-					let getIndexOfSuggestion = this.followersSuggestions.findIndex(f => f.username === username);
-					this.followings.push(this.followersSuggestions[getIndexOfSuggestion]);
-
-					// remove from Followers Suggestions array
-					this.followersSuggestions.splice(getIndexOfSuggestion, 1);
-				},
-
-				unfollow(username) {
-					let getIndexOfFollower = this.followings.findIndex(f => f.username === username);
-					this.followersSuggestions.push(this.followings[getIndexOfFollower]);
-
-					// remove from followings array
-					this.followings.splice(getIndexOfFollower, 1);
-				},
-
-				saveTweet() {
-					this.tweets.unshift({
-						name: "Current User",
-						username: "@current_user",
-						tweet: this.tweetText,
-						retweets: 0,
-						likes: 0,
-						date: new Date(),
-						tweet_images: this.images,
-						hasBeenLiked: false,
-						hasBeenRetweeted: false
-					});
-
-					this.images = [];
-					this.tweetText = '';
-				},
-
-				retweet(index) {
-					this.tweets[index].hasBeenRetweeted ? this.tweets[index].retweets-- : this.tweets[index].retweets++;
-					this.tweets[index].hasBeenRetweeted = !this.tweets[index].hasBeenRetweeted;
-				},
-
-				likeTweet(index) {
-					this.tweets[index].hasBeenLiked ? this.tweets[index].likes-- : this.tweets[index].likes++;
-					this.tweets[index].hasBeenLiked = !this.tweets[index].hasBeenLiked;
-				},
-
-				charactersRemaining() {
-					return MAX_TWEET_LENGTH - this.tweetText.length;
-				},
-
-				tweetIsOutOfRange() {
-					return (MAX_TWEET_LENGTH - this.tweetText.length) == MAX_TWEET_LENGTH || (MAX_TWEET_LENGTH - this.tweetText.length) < 0;
-				},
-
-				generateAvatarFromName(name) {
-					return name.split(" ")[0].slice(0, 1) +''+ name.split(" ")[1].slice(0, 1);
-				},
-
-				formatDate(date) {
-					if (!date) {
-    					return null;
- 	 				}
-					
-					const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
-					const today = new Date();
-					const yesterday = new Date(today - DAY_IN_MS);
-					const d = new Date(date);
-					const day = d.getDate();
-  					const month = MONTH_NAMES[d.getMonth()];
-
-					const seconds = Math.round((today - d) / 1000);
-  					const minutes = Math.round(seconds / 60);
-					const hours = Math.round(minutes / 60);
-
-					const isToday = today.toDateString() === d.toDateString();
-					// const isYesterday = yesterday.toDateString() === date.toDateString();
-					// const isThisYear = today.getFullYear() === date.getFullYear();
-					
-					if (isToday) {
-						if (seconds < 5) {
-							return 'now';
-						} else if (seconds < 60) {
-							return `${ seconds }s`;
-						} else if (minutes < 60) {
-							return `${ minutes }m`;
-						} else {
-							return `${ hours }h`;
-						}
-					} else {
-						return month +' '+ day;
-					}
-				}
-			}
-		}
-	</script>
-</body>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
+        follow(username) {
+          let getIndexOfSuggestion = this.followersSuggestions.findIndex(f => f.username === username);
+          this.followings.push(this.followersSuggestions[getIndexOfSuggestion]);
+          this.followersSuggestions.splice(getIndexOfSuggestion, 1);
+        },
+        unfollow(username) {
+          let getIndexOfFollower = this.followings.findIndex(f => f.username === username);
+          this.followersSuggestions.push(this.followings[getIndexOfFollower]);
+          this.followings.splice(getIndexOfFollower, 1);
+        },
+        saveTweet() {
+          // If no image, post immediately
+          if (!this.tweetImage) {
+            this.tweets.unshift({
+              name: "Current User",
+              username: "@current_user",
+              tweet: this.tweetText,
+              retweets: 0,
+              likes: 0,
+              date: new Date(),
+              hasBeenLiked: false,
+              hasBeenRetweeted: false,
+              tweet_image: null,
+              tweet_image_tag: null
+            });
+            this.tweetText = '';
+            this.tweetImage = null;
+            this.tweetImageTag = null;
+            return;
+          }
+          // If image, send to backend for prediction
+          fetch('http://localhost:8001/predict-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image_base64: this.tweetImage })
+          })
+          .then(res => res.json())
+          .then(data => {
+            this.tweets.unshift({
+              name: "Current User",
+              username: "@current_user",
+              tweet: this.tweetText,
+              retweets: 0,
+              likes: 0,
+              date: new Date(),
+              hasBeenLiked: false,
+              hasBeenRetweeted: false,
+              tweet_image: this.tweetImage,
+              tweet_image_tag: data.tag || null
+            });
+            this.tweetText = '';
+            this.tweetImage = null;
+            this.tweetImageTag = null;
+          })
+          .catch(() => {
+            this.tweets.unshift({
+              name: "Current User",
+              username: "@current_user",
+              tweet: this.tweetText,
+              retweets: 0,
+              likes: 0,
+              date: new Date(),
+              hasBeenLiked: false,
+              hasBeenRetweeted: false,
+              tweet_image: this.tweetImage,
+              tweet_image_tag: "Unknown"
+            });
+            this.tweetText = '';
+            this.tweetImage = null;
+            this.tweetImageTag = null;
+          });
+        },
+        retweet(index) {
+          this.tweets[index].hasBeenRetweeted ? this.tweets[index].retweets-- : this.tweets[index].retweets++;
+          this.tweets[index].hasBeenRetweeted = !this.tweets[index].hasBeenRetweeted;
+        },
+        likeTweet(index) {
+          this.tweets[index].hasBeenLiked ? this.tweets[index].likes-- : this.tweets[index].likes++;
+          this.tweets[index].hasBeenLiked = !this.tweets[index].hasBeenLiked;
+        },
+        charactersRemaining() {
+          return MAX_TWEET_LENGTH - this.tweetText.length;
+        },
+        tweetIsOutOfRange() {
+          return (MAX_TWEET_LENGTH - this.tweetText.length) == MAX_TWEET_LENGTH || (MAX_TWEET_LENGTH - this.tweetText.length) < 0;
+        },
+        generateAvatarFromName(name) {
+          const parts = name.split(" ");
+          return (parts[0]?.[0] || '') + (parts[1]?.[0] || '');
+        },
+        formatDate(date) {
+          if (!date) return null;
+          const DAY_IN_MS = 86400000;
+          const today = new Date();
+          const d = new Date(date);
+          const day = d.getDate();
+          const month = MONTH_NAMES[d.getMonth()];
+          const seconds = Math.round((today - d) / 1000);
+          const minutes = Math.round(seconds / 60);
+          const hours = Math.round(minutes / 60);
+          const isToday = today.toDateString() === d.toDateString();
+          if (isToday) {
+            if (seconds < 5) return 'now';
+            if (seconds < 60) return `${seconds}s`;
+            if (minutes < 60) return `${minutes}m`;
+            return `${hours}h`;
+          } else {
+            return month + ' ' + day;
+          }
+        },
+        formatDebateTime(time) {
+          if (!time) return '';
+          const d = new Date(time);
+          return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+        },
+        startDebate() {
+          if (!this.debateTopic.trim() || !this.debateTime) return;
+          this.debates.unshift({
+            topic: this.debateTopic,
+            gmeet: this.debateGMeet,
+            startedBy: "Current User",
+            date: new Date(),
+            time: this.debateTime
+          });
+          this.debateTopic = '';
+          this.debateGMeet = '';
+          this.debateTime = '';
+        },
+        copyGMeet(link) {
+          if (!link) return;
+          navigator.clipboard.writeText(link);
+          alert('Google Meet link copied!');
+        },
+        onTweetImageChange(event) {
+          const file = event.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.tweetImage = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        },
+        removeTweetImage() {
+          this.tweetImage = null;
+          document.getElementById('tweetImageInput').value = '';
+        }
+      }
+    }
+  </script>
 </body>
 </html>
